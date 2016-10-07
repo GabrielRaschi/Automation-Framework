@@ -1,0 +1,21 @@
+<suite name="Suite">
+    <test name="AllTests">
+        <groups>
+            <run>
+                <include name="Test" />
+            </run>
+        </groups>
+        <classes>
+            <class name="com.carrefour_online.tests.LoginTest"/>
+            <methods>
+                <include name="VerifyHomepage"></include>
+                <include name="VerifyInvalidLogin"></include>
+                <include name="LoginWithValid"></include>
+            </methods>
+            <class name="com.carrefour_online.tests.ProfileTest"/>
+            <methods>
+                <include name="EditProfileInformation"></include>
+            </methods>
+        </classes>
+    </test>
+</suite>
