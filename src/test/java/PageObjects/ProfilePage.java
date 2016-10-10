@@ -23,9 +23,11 @@ public class ProfilePage extends MainPage{
     public WebElement streetField;
     @FindBy( xpath = "//*[@id=\"profile_phone\"]")
     public WebElement phoneField;
-    @FindBy( xpath = "//*[@id=\"form1\"]/div[12]/div/div[1]/div[3]/div/div[1]/span[2]")
+    @FindBy( xpath = "//*[@id=\"form1\"]/div[12]/div/div[1]/div[3]/div")
+//    @FindBy( xpath = "//*[@id=\"form1\"]/div[12]/div/div[1]/div[3]/div/div[1]/span[2]")
     public WebElement cityButton;
-    @FindBy( xpath = "//*[@id=\"form1\"]/div[12]/div/div[1]/div[4]/div/div[1]/span[2]")
+    @FindBy( xpath = "//*[@id=\"form1\"]/div[12]/div/div[1]/div[4]/div")
+//    @FindBy( xpath = "//*[@id=\"form1\"]/div[12]/div/div[1]/div[4]/div/div[1]/span[2]")
     public WebElement zoneButton;
     @FindBy( xpath = "//*[@id=\"ucPrompt_profile_gender\"]/tbody/tr[1]/td/span/label")
     public WebElement femininButton;

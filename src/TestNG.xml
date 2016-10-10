@@ -16,6 +16,10 @@
             <methods>
                 <include name="EditProfileInformation"></include>
             </methods>
+            <class name="com.carrefour_online.tests.MainpageTest"/>
+            <methods>
+                <include name="SearchAndEdit"></include>
+            </methods>
         </classes>
     </test>
 </suite>

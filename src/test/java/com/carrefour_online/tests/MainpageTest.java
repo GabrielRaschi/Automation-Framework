@@ -3,13 +3,14 @@ import AutomationFramework.DataItems;
 import PageObjects.MainPage;
 import com.carrefour_online.DriverBase;
 import org.openqa.selenium.WebDriver;
+import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
 public class MainpageTest extends DriverBase {
 
     @Test
             (groups = "Test")
-    public void SearchAndAdd() throws Exception {
+    public void SearchAndEdit() throws Exception {
 
         WebDriver driver = getDriver();
 
@@ -18,5 +19,7 @@ public class MainpageTest extends DriverBase {
 
         MainPage mainPage = new MainPage(driver);
         mainPage.Search("apa");
+
+        AssertJUnit.assertTrue("Wrong page accessed...", driver.getTitle().equals(DataItems.homepageTitle));
     }
 }
