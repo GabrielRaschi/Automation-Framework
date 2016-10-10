@@ -22,7 +22,7 @@ public class ProfileTest extends DriverBase {
         System.out.println("Modifying the information on the profile page...");
         profilePage.EditProfile("Doe", "Jane", "bucuresti", "bucuresti", "ale. str. blvd.", "0744123456", profilePage.femininButton, "10", "10", "1999");
         System.out.println("Modifying the information on the profile page...");
-        profilePage.EditProfile("Doe", "John", "alba", "blaj", "blvd. carrefour", "0744000000", profilePage.masculinButton, "12", "12", "2000");
+        profilePage.EditProfile("Doe", "John", "arad", "lipova", "blvd. carrefour", "0744000000", profilePage.masculinButton, "12", "12", "2000");
     }
 
 }

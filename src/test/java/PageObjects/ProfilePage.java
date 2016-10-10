@@ -100,12 +100,12 @@ public class ProfilePage extends MainPage{
         setInputField(driver, birthYearField, year);
         System.out.println("Clicking the save button...");
         saveButton.click();
+//        closeButton.click();
+        driver.navigate().refresh();
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        closeButton.click();
-        driver.navigate().refresh();
     }
 }
