@@ -1,7 +1,9 @@
 package PageObjects;
+import AutomationFramework.DataItems;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -71,6 +73,29 @@ public class MainPage {
     public WebElement confirmButton;
     @FindBy( xpath = "//*[@id=\"lnk_back\"]")
     public WebElement backButton;
+    @FindBy( xpath = "//*[@id=\"content_1_repRecommendedProducts_ctl00_0_hlImage_0\"]")
+    public WebElement firstProduct;
+    @FindBy( xpath = "//*[@id=\"page\"]/div[3]/nav/ul/li[1]/a")
+    public WebElement promotii;
+    @FindBy( xpath = "//*[@id=\"page\"]/div[3]/nav/ul/li[1]/div/ul/li[1]/a")
+    public WebElement legumeSiFructeSubmenu;
+    @FindBy( xpath = "//*[@id=\"page\"]/div[3]/nav/ul/li[2]/a")
+    public WebElement legumeSiFructe;
+    @FindBy( xpath = "//*[@id=\"page\"]/div[3]/nav/ul/li[2]/div/ul/li[1]/a")
+    public WebElement fructe;
+    @FindBy( xpath = "//*[@id=\"page\"]/div[3]/nav/ul/li[3]/a")
+    public WebElement brutarie;
+    @FindBy( xpath = "//*[@id=\"page\"]/div[3]/nav/ul/li[3]/div/ul/li[1]/a")
+    public WebElement panificatie;
+    @FindBy( xpath = "//*[@id=\"page\"]/div[3]/nav/ul/li[4]/a")
+    public WebElement carneMezeluriSiLactate;
+    @FindBy( xpath = "//*[@id=\"page\"]/div[3]/nav/ul/li[4]/div/ul/li[1]/a")
+    public WebElement carneSiPeste;
+    @FindBy( xpath = "//*[@id=\"page\"]/div[3]/nav/ul/li[5]/a")
+    public WebElement bacanie;
+    @FindBy( xpath = "//*[@id=\"page\"]/div[3]/nav/ul/li[5]/div/ul/li[1]/a")
+    public WebElement dressing;
+
 
 
     public void sleep(int seconds) {
@@ -118,5 +143,12 @@ public class MainPage {
         clickable(driver, backButton);
         backButton.click();
         clickable(driver, carrefourLogo);
+    }
+
+    public void AccessCategoriesFromMenu(WebElement elementFromList, WebElement elementFromSubList) {
+        driver.get(DataItems.targetURL);
+        clickable(driver, promotii);
+        Actions action = new Actions(driver);
+        action.moveToElement(elementFromList).moveToElement(elementFromSubList).click().build().perform();
     }
 }

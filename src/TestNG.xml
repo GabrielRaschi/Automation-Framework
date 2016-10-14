@@ -19,6 +19,7 @@
             <class name="com.carrefour_online.tests.MainpageTest"/>
             <methods>
                 <include name="SearchAndEdit"></include>
+                <include name="AccessCategories"></include>
             </methods>
         </classes>
     </test>
