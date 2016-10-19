@@ -18,7 +18,6 @@ public class LoginTest extends DriverBase {
         System.out.println("Checking that the user reached the correct landing page...");
         outputToExcel("2", "1", "Navigate to the landing page", "Reached the correct landing page", "Failed");
         AssertJUnit.assertTrue("Wrong homepage...", driver.getTitle().equals(DataItems.homepageTitle));
-
         outputToExcel("2", "1", "Navigate to the landing page", "Reached the correct landing page", "Passed");
     }
 
