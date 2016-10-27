@@ -70,7 +70,7 @@ public class DriverBase {
             getDriver().manage().deleteAllCookies();
         }
 
-    */
+
 
     @AfterMethod(alwaysRun = true)
     public void closeDriverObjects() {
@@ -114,4 +114,5 @@ public class DriverBase {
             driverFactory.quitDriver();
         }
     }
+      */
 }

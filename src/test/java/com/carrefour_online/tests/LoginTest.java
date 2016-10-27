@@ -1,6 +1,7 @@
 package com.carrefour_online.tests;
+
 import AutomationFramework.DataItems;
-import PageObjects.LoginPage;
+import PageObjects.MyAccountPage;
 import com.carrefour_online.DriverBase;
 import org.openqa.selenium.WebDriver;
 import org.testng.AssertJUnit;
@@ -10,46 +11,59 @@ public class LoginTest extends DriverBase {
 
     @Test
             (groups = "Test")
-    public void VerifyLandingPage() throws Exception {
+    public void L_V_01() throws Exception {
         WebDriver driver = getDriver();
 
         Carrefour_Base base = new Carrefour_Base(driver);
-        base.setUp("Verifying that the user accessed the correct landing page...", "VerifyHomepage");
-        System.out.println("Checking that the user reached the correct landing page...");
-        outputToExcel("2", "1", "Navigate to the landing page", "Reached the correct landing page", "Failed");
-        AssertJUnit.assertTrue("Wrong homepage...", driver.getTitle().equals(DataItems.homepageTitle));
-        outputToExcel("2", "1", "Navigate to the landing page", "Reached the correct landing page", "Passed");
+        base.setUp("Login Validation 01 : Login with: empty, wrong, correct combinations of password and username", "L_V_01");
+
+        MyAccountPage map = new MyAccountPage(driver);
+
+        System.out.println("Login with empty username and pass and check notification");
+        map.loginWithUsernameAndPassword("", "");
+        AssertJUnit.assertTrue("Login is possible with empty username and password or notification is not proper", map.notificationText(DataItems.warning).equals(DataItems.wrongLoginMsg));
+
+        System.out.println("Login with correct username and empty pass and check notification");
+        map.loginWithUsernameAndPassword(DataItems.validUsername, "");
+        AssertJUnit.assertTrue("Login is possible with empty username and password or notification is not proper", map.notificationText(DataItems.warning).equals(DataItems.wrongLoginMsg));
+
+        System.out.println("Login with correct username and wrong pass and check notification");
+        map.loginWithUsernameAndPassword(DataItems.validUsername, "wrong");
+        AssertJUnit.assertTrue("Login is possible with empty username and password or notification is not proper", map.notificationText(DataItems.warning).equals(DataItems.wrongLoginMsg));
+
+        System.out.println("Login with correct username and correct pass and check notification");
+        map.loginWithUsernameAndPassword(DataItems.validUsername, DataItems.validPassword);
+        AssertJUnit.assertTrue("Login is not successful or notification is not proper", map.notificationText(DataItems.login).equals(DataItems.correctLoginMsg));
+
+        System.out.println("Logout and verify logout message");
+        AssertJUnit.assertTrue("Logout notification is not proper", map.notificationText(DataItems.logout).equals(DataItems.correctLogoutMsg));
     }
 
     @Test
             (groups = "Test")
-    public void VerifyInvalidLogin() throws Exception {
-
+    public void L_V_02() throws Exception {
         WebDriver driver = getDriver();
 
         Carrefour_Base base = new Carrefour_Base(driver);
-        base.setUp("Logging in with invalid credentials...", "VerifyInvalidLogin", DataItems.invalidUsername, DataItems.invalidPassword);
-        LoginPage loginPage = new LoginPage(driver);
-        System.out.println("Checking that the user is on the login page...");
-        outputToExcel("3", "2", "Navigate to the login page", "Reached the correct login page", "Failed");
-        AssertJUnit.assertTrue("Wrong page...", driver.getTitle().equals(DataItems.loginTitle));
-        outputToExcel("3", "2", "Navigate to the login page", "Reached the correct login page", "Passed");
-        System.out.println("Checking that the error message is received...");
-        outputToExcel("4", "3", "Verify the correct error message", "Error message is correct", "Failed");
-        AssertJUnit.assertTrue("Wrong page...", loginPage.errorMessage.getText().equals(DataItems.invalidLogin));
-        outputToExcel("4", "3", "Verify the correct error message", "Error message is correct", "Passed");
-    }
+        base.setUp("Login Validation 02 : Verify labels for login and new acc fields", "L_V_02");
 
-    @Test
-            (groups = "Test")
-    public void LoginWithValid() throws Exception {
+        System.out.println("Verify labels for login form");
+        MyAccountPage map = new MyAccountPage(driver);
+        map.myAccountLocator.click();
+        AssertJUnit.assertTrue("Label is not correct for login form tab", map.getLabelNameFor(DataItems.loginFormTabAndTitle[0]).equals(DataItems.loginFormTabAndTitle[2]));
+        AssertJUnit.assertTrue("Label is not correct for login form title", map.getLabelNameFor(DataItems.loginFormTabAndTitle[1]).equals(DataItems.loginFormTabAndTitle[2]));
+        AssertJUnit.assertTrue("Label is not correct for login login email field", map.getLabelNameFor(DataItems.loginEmail[0]).equals(DataItems.loginEmail[1]));
+        AssertJUnit.assertTrue("Label is not correct for login login password field", map.getLabelNameFor(DataItems.loginPassword[0]).equals(DataItems.loginPassword[1]));
 
-        WebDriver driver = getDriver();
-
-        Carrefour_Base base = new Carrefour_Base(driver);
-        base.setUp("Logging in with valid credentials...", "LoginWithValid", DataItems.validUsername, DataItems.validPassword);
-        outputToExcel("5", "4", "Navigate to the homepage after logging in", "Reached the correct homepage", "Failed");
-        AssertJUnit.assertTrue("Wrong homepage...", driver.getTitle().equals(DataItems.homepageTitle));
-        outputToExcel("5", "4", "Navigate to the homepage after logging in", "Reached the correct homepage", "Passed");
+        System.out.println("Verify labels for new account form");
+        map.newAccountFormTab.click();
+        AssertJUnit.assertTrue("Label is not correct for new account form tab", map.getLabelNameFor(DataItems.newAccFormTabAndTitle[0]).equals(DataItems.newAccFormTabAndTitle[2]));
+        AssertJUnit.assertTrue("Label is not correct for new account form title", map.getLabelNameFor(DataItems.newAccFormTabAndTitle[1]).equals(DataItems.newAccFormTabAndTitle[2]));
+        AssertJUnit.assertTrue("Label is not correct for login first name field", map.getLabelNameFor(DataItems.firstName[0]).equals(DataItems.firstName[1]));
+        AssertJUnit.assertTrue("Label is not correct for login last name field", map.getLabelNameFor(DataItems.lastName[0]).equals(DataItems.lastName[1]));
+        AssertJUnit.assertTrue("Label is not correct for login new account email field", map.getLabelNameFor(DataItems.newAccEmail[0]).equals(DataItems.newAccEmail[1]));
+        AssertJUnit.assertTrue("Label is not correct for login new account phone number field", map.getLabelNameFor(DataItems.phoneNumber[0]).equals(DataItems.phoneNumber[1]));
+        AssertJUnit.assertTrue("Label is not correct for login new account password field", map.getLabelNameFor(DataItems.newAccPassword[0]).equals(DataItems.newAccPassword[1]));
+        AssertJUnit.assertTrue("Label is not correct for login new account confirm password field", map.getLabelNameFor(DataItems.newAccConfirmPassword[0]).equals(DataItems.newAccConfirmPassword[1]));
     }
 }

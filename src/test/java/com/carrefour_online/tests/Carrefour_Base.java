@@ -1,7 +1,6 @@
 package com.carrefour_online.tests;
 import AutomationFramework.DataItems;
-import PageObjects.LoginPage;
-import PageObjects.MainPage;
+import PageObjects.MyAccountPage;
 import org.openqa.selenium.WebDriver;
 
 public class Carrefour_Base {
@@ -23,6 +22,11 @@ public class Carrefour_Base {
 
         //Maximize browser window
         driver.manage().window().maximize();
+
+        MyAccountPage map = new MyAccountPage(driver);
+        map.closeButton.click();
+
+
     }
 
     public void setUp(String testTitle, String scenarioID, String username, String password) {
@@ -31,17 +35,16 @@ public class Carrefour_Base {
         System.out.println("Scenario ID: "+scenarioID);
 
         //Navigate to QA site
-        System.out.println("Navigating to QA Environment...");
+        System.out.println("Navigating to Environment...");
         driver.get(DataItems.targetURL);
 
         //Maximize browser window
         driver.manage().window().maximize();
 
-        MainPage mainPage = new MainPage(driver);
-        mainPage.authButton.click();
+        MyAccountPage map = new MyAccountPage(driver);
 
         //Login with valid credentials
-        LoginPage loginPage = new LoginPage(driver);
-        loginPage.loginWithUsernameAndPassword(username, password);
+        map.loginWithUsernameAndPassword(username, password);
+
     }
 }
