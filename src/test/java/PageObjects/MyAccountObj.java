@@ -302,11 +302,91 @@ public class MyAccountObj extends MainPage{
     @FindBy(css = "#my-companies > div > a > span.text-button.ng-binding")
     public  WebElement newInvoiceDataButton;
 
+    @FindBy(css = "#my-companies > ul > li > div > div:nth-child(1) > h2")
+    public  WebElement invoiceNameOnTab;
+
+    @FindBy(css = "#my-companies > ul > li > div > div:nth-child(1) > p")
+    public  WebElement invoiceDataOnTab;
+
+    @FindBy(css = "#my-companies > ul > li:nth-child(1) > div > div.item.right > a.account-link.edit-button.ng-binding")
+    public  WebElement editInvoiceDataButton;
+
     // --- Invoice Data Form
 
     @FindBy(css = "body > div:nth-child(1) > div > div > div.modal-body.ng-scope > form > div:nth-child(1) > input")
     public WebElement invoiceNameField;
 
+    @FindBy(css = "body > div:nth-child(1) > div > div > div.modal-body.ng-scope > form > div:nth-child(1) > div > span")
+    public WebElement warningInvoiceNameField;
+
+    @FindBy(xpath = "/html/body/div[1]/div/div/div[2]/form/div[4]/div/label[1]/input")
+    public WebElement meIndividualRadioButton;
+
+    @FindBy(xpath = "/html/body/div[1]/div/div/div[2]/form/div[4]/div/label[2]/input")
+    public WebElement elseIndividualRadioButton;
+
+    @FindBy(xpath = "/html/body/div[1]/div/div/div[2]/form/div[5]/div/label[1]/input")
+    public WebElement meLegalEntityRadioButton;
+
+    @FindBy(xpath = "/html/body/div[1]/div/div/div[2]/form/div[5]/div/label[2]/input")
+    public WebElement elseLegalEntityRadioButton;
+
+
+
+
+    // -- Individual
+
+    @FindBy(css = "body > div:nth-child(1) > div > div > div.modal-body.ng-scope > form > div.radio.form-group > label:nth-child(1) > input")
+    public WebElement individualRadioButton;
+
+    @FindBy(css = "body > div:nth-child(1) > div > div > div.modal-body.ng-scope > form > div:nth-child(3) > input")
+    public WebElement individualAddressField;
+
+    @FindBy(css = "body > div:nth-child(1) > div > div > div.modal-body.ng-scope > form > div:nth-child(3) > div > span")
+    public WebElement warningIndividualAddressField;
+
+    @FindBy(css = "body > div:nth-child(1) > div > div > div.modal-body.ng-scope > form > div:nth-child(4) > input")
+    public WebElement individualElseField;
+
+    @FindBy(css = "body > div:nth-child(1) > div > div > div.modal-body.ng-scope > form > div:nth-child(4) > div.ng-scope > span")
+    public WebElement warningIndiviualElseField;
+
+    @FindBy(css = "body > div:nth-child(1) > div > div > div.modal-footer.ng-scope > button.btn.btn-primary.ng-binding")
+    public WebElement saveInvoiceIndividualButton;
+
+
+
+    // -- Legal entity
+
+    @FindBy(css = "body > div:nth-child(1) > div > div > div.modal-body.ng-scope > form > div.radio.form-group > label:nth-child(2) > input")
+    public WebElement legalEntityRadioButton;
+
+    @FindBy(css = "body > div:nth-child(1) > div > div > div.modal-body.ng-scope > form > div.ng-scope > div:nth-child(1) > input")
+    public WebElement firmNameField;
+
+    @FindBy(css = "body > div.modal.fade.ng-isolate-scope.in > div > div > div.modal-body.ng-scope > form > div.ng-scope > div:nth-child(1) > div > span")
+    public WebElement warningFirmName;
+
+    @FindBy(css = "body > div:nth-child(1) > div > div > div.modal-body.ng-scope > form > div.ng-scope > div:nth-child(2) > input")
+    public WebElement fiscalCodeField;
+
+    @FindBy(css = "body > div.modal.fade.ng-isolate-scope.in > div > div > div.modal-body.ng-scope > form > div.ng-scope > div:nth-child(2) > div > span")
+    public WebElement warningFiscalCode;
+
+    @FindBy(css = "body > div:nth-child(1) > div > div > div.modal-body.ng-scope > form > div:nth-child(4) > input")
+    public WebElement addressLegalEntityField;
+
+    @FindBy(css = "body > div.modal.fade.ng-isolate-scope.in > div > div > div.modal-body.ng-scope > form > div:nth-child(4) > div > span")
+    public WebElement warningAddressLegalEntity;
+
+    @FindBy(css = "body > div:nth-child(1) > div > div > div.modal-body.ng-scope > form > div:nth-child(5) > input")
+    public WebElement legalEntityElseField;
+
+    @FindBy(css = "body > div:nth-child(1) > div > div > div.modal-body.ng-scope > form > div:nth-child(5) > div.ng-scope > span")
+    public WebElement warningLegalEntityElseField;
+
+    @FindBy(css = "body > div.modal.fade.ng-isolate-scope.in > div > div > div.modal-footer.ng-scope > button.btn.btn-primary.ng-binding")
+    public WebElement saveLegalEntityButton;
 
 
 
@@ -388,17 +468,24 @@ public class MyAccountObj extends MainPage{
 
 
     public void changePasswordForUser(String currentPass, String newPass){
-        myProfileMenuLocator.click();
         showPassFieldsLocator.click();
         CommonTask.setInputField(driver, oldPasswordField, currentPass);
         CommonTask.setInputField(driver, newPasswordField, newPass);
         CommonTask.setInputField(driver, confirmNewPasswordField, newPass);
         saveProfileButton.click();
+    }
+
+    public void changeEmailAddress(String email){
+        CommonTask.setDropDownField(driver, emailAdressEditField, email);
+        saveProfileButton.click();
+    }
+
+
+    public  void logoutUser(){
         myAccountLocator.click();
         visible(driver, logoutLocator);
         logoutLocator.click();
     }
-
     public void goToMyProfile(){
         clickable(driver, notificationLogin);
         myProfileMenuLocator.click();
@@ -466,6 +553,26 @@ public class MyAccountObj extends MainPage{
         CommonTask.setInputField(driver, shPhoneNumberField, phone);
     }
 
+
+    public void inputIndividualDataForInvoices(String name, String address, String elsePerson ){
+        CommonTask.setInputField(driver, invoiceNameField, name);
+        CommonTask.setInputField(driver, individualAddressField, address);
+        CommonTask.setCheckBox(driver, elseIndividualRadioButton);
+        CommonTask.setInputField(driver, individualElseField, elsePerson);
+        saveInvoiceIndividualButton.click();
+    }
+
+    public void inputLegalEntityDataForInvoices(String invoiceName, String firmName, String fiscalCode, String address, String elsePerson ){
+        CommonTask.setInputField(driver, invoiceNameField, invoiceName);
+        CommonTask.setCheckBox(driver, legalEntityRadioButton);
+        CommonTask.setInputField(driver, firmNameField, firmName );
+        CommonTask.setInputField(driver, fiscalCodeField, fiscalCode );
+        CommonTask.setInputField(driver, addressLegalEntityField, address );
+        CommonTask.setCheckBox(driver, elseLegalEntityRadioButton);
+        CommonTask.setInputField(driver, legalEntityElseField, elsePerson);
+        saveLegalEntityButton.click();
+
+    }
 
 
 

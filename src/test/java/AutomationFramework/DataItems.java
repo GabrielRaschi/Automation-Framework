@@ -4,7 +4,9 @@ public class DataItems {
 
     public static String targetURL =" https://prod.ecarrefour.ro/";
     public static String validUsername = "test01@de.de";
+    public static String changedUsername = "test02@de.de";
     public static String validPassword = "Tremend10ani";
+    public static String changedPassword = "Tremend11ani";
 
 
     // -------------- Notification messages
@@ -15,6 +17,9 @@ public class DataItems {
     public static String addNewShippingAddressMsg = "ai salvat o noua adresa";
     public static String shippingAddressUpdateMsg = "adresa a fost actualizata";
     public static String deleteShippingAddressMsg = "adresa a fost stearsa";
+    public static String addNewInvoiceMsg = "datele de facturare au fost salvate";
+    public static String updateInvoiceMsg = "";
+    public static String deleteInvoiceMsg = "";
 
     // -------------- Type of notification
     public static String login = "Login";
@@ -25,6 +30,9 @@ public class DataItems {
     public static String addShppingAddress = "ShippingAdd";
     public static String updateShppingAddress = "ShippingUp";
     public static String deleteShippingAddress = "ShippingDel";
+    public static String addInvoice = "InvoiceAdd";
+    public static String updateInvoice = "InvoiceUp";
+    public static String deleteInvoice = "InvoiceDel";
 
 
     // -------------- Field Labels
@@ -57,6 +65,12 @@ public class DataItems {
     public static String shippingAddressData02[] = {"testAddressName02", "testStreetName02", "testStreetNo02", "testBuilding02", "testBuildingDoor02", "testFloor02", "testApartment02", "testIntercom02", "060543", "testDistrict02", "Bucuresti Sector 6"};
     public static String userDataShippingAdress01[] = {"testFirstname01", "testLastName01", "testPhone01"};
     public static String userDataShippingAdress02[] = {"testFirstname02", "testLastName02", "testPhone02"};
+
+    // -------------- InvoiceData
+    public static String invoiceDataForIndividual01[] = {"testInvoiceName01", "testAddress01", "testPerson01"};
+    public static String invoiceDataForIndividual02[] = {"testInvoiceName02", "testAddress02", "testPerson02"};
+    public static String invoiceDataForLegalEntity01[] = {"testInvoiceName01", "testFirmName01", "testFiscalCode01", "testFirmAddress01", "testPerson01"};
+    public static String invoiceDataForLegalEntity02[] = {"testInvoiceName02", "testFirmName02", "testFiscalCode02", "testFirmAddress02", "testPerson02"};
 
 
     // -------------- Get Attribute

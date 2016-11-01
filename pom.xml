@@ -205,7 +205,7 @@
                                 <webdriver.ie.driver>${webdriver.ie.driver}</webdriver.ie.driver>
                                 <webdriver.opera.driver>${webdriver.opera.driver}</webdriver.opera.driver>
                             </systemProperties>
-                            <groups>Test, Settlement</groups>
+                            <groups>Test</groups>
                             <skipTests>false</skipTests>
                             <includes>
                                 <include>**/*WebDriver.java</include>

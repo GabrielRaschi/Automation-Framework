@@ -173,6 +173,23 @@ public class CommonTask {
 
     }
 
+    public static void setCheckBox(WebDriver driver, WebElement element) {
+        //Check a checkbox, ensuring its value is "checked"
+
+        //Only perform the condition if it is not already selected to avoid a timeout exception
+
+
+        if (!element.isSelected()){
+            element.click();
+            //Check box
+            element.click();
+
+            //Wait for box to be checked
+            Boolean waitForChecked = new WebDriverWait(driver,DataItems.shortWait).until(CommonTask.boxIsChecked(element));
+        }
+    }
+
+
     public static void unSetCheckBox(WebDriver driver, By fieldLocator) {
         //Check a checkbox, ensuring its value is "unchecked"
 

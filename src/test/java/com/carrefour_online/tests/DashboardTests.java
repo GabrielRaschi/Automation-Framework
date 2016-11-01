@@ -174,8 +174,187 @@ public class DashboardTests extends DriverBase{
         System.out.println("Deleting Shipping Address");
         map.deleteShippingAddressButton.click();
         AssertJUnit.assertTrue("Notification not present for delete or text is wrong", map.notificationText(DataItems.deleteShippingAddress).equals(DataItems.deleteShippingAddressMsg));
+    }
+
+    @Test
+            (groups = "Test")
+    public void ID_I_01() throws Exception {
+        WebDriver driver = getDriver();
+
+        Carrefour_Base base = new Carrefour_Base(driver);
+        base.setUp("Invoice Data - Individual 01 : Validation for empty fields", "ID_I_01", DataItems.validUsername, DataItems.validPassword);
+
+        MyAccountObj map = new MyAccountObj(driver);
+        System.out.println("Going to invoice data tab");
+        map.goToInvoiceData();
+
+        System.out.println("Clearing all fields and saving");
+        map.newInvoiceDataButton.click();
+        map.inputIndividualDataForInvoices("", "", "");
+
+        System.out.println("Asserting mandatory fields alerts");
+        Wait.clickable(driver, map.warningInvoiceNameField);
+        AssertJUnit.assertTrue("Warning msg didn't show up or is incorrect for invoice name", map.warningInvoiceNameField.getText().equals(DataItems.blankFieldMsgForShipping));
+        AssertJUnit.assertTrue("Warning msg didn't show up or is incorrect for individual address", map.warningIndividualAddressField.getText().equals(DataItems.blankFieldMsgForShipping));
+        AssertJUnit.assertTrue("Warning msg didn't show up or is incorrect for else person", map.warningIndiviualElseField.getText().equals(DataItems.blankFieldMsgForShipping));
+    }
+
+    @Test
+            (groups = "Test")
+    public void ID_I_02() throws Exception {
+        WebDriver driver = getDriver();
+
+        Carrefour_Base base = new Carrefour_Base(driver);
+        base.setUp("Invoice Data – Individual 02 : Add new adress flow is working correct", "ID_I_02", DataItems.validUsername, DataItems.validPassword);
+
+        MyAccountObj map = new MyAccountObj(driver);
+        System.out.println("Going to invoice data tab");
+        map.goToInvoiceData();
+
+        System.out.println("Creating Invoice for Individual");
+        map.newInvoiceDataButton.click();
+        map.inputIndividualDataForInvoices(DataItems.invoiceDataForIndividual01[0], DataItems.invoiceDataForIndividual01[1], DataItems.invoiceDataForIndividual01[2]);
+
+        System.out.println("Verify notification is present and msg is correct");
+        AssertJUnit.assertTrue("Notification not present for update or text is wrong", map.notificationText(DataItems.addInvoice).equals(DataItems.addNewInvoiceMsg));
+
+        System.out.println("Verify that data is saved correctly");
+        AssertJUnit.assertTrue("Data saved for invoice name is not correct", map.invoiceNameOnTab.getText().equals(DataItems.invoiceDataForIndividual01[0].toUpperCase()));
+        AssertJUnit.assertTrue("Rest of the data that is saved for shipping address is not correct", map.invoiceDataOnTab.getText().equals(DataItems.invoiceDataForIndividual01[1]));
+    }
+
+    @Test
+            (groups = "Test")
+    public void ID_I_03() throws Exception {
+        WebDriver driver = getDriver();
+
+        Carrefour_Base base = new Carrefour_Base(driver);
+        base.setUp("Invoice Data – Individual 03 : Edit test", "ID_I_03", DataItems.validUsername, DataItems.validPassword);
+
+        MyAccountObj map = new MyAccountObj(driver);
+        System.out.println("Going to invoice data tab");
+        map.goToInvoiceData();
+
+        System.out.println("Creating Invoice for Individual");
+        map.newInvoiceDataButton.click();
+        map.inputIndividualDataForInvoices(DataItems.invoiceDataForIndividual01[0], DataItems.invoiceDataForIndividual01[1], DataItems.invoiceDataForIndividual01[2]);
+        AssertJUnit.assertTrue("Notification not present for update or text is wrong", map.notificationText(DataItems.addInvoice).equals(DataItems.addNewInvoiceMsg));
+
+        System.out.println("Editing Invoice for Individual and adding new data");
+        map.editInvoiceDataButton.click();
+        map.inputIndividualDataForInvoices(DataItems.invoiceDataForIndividual02[0], DataItems.invoiceDataForIndividual02[1], DataItems.invoiceDataForIndividual02[2]);
+
+        System.out.println("Verify notification is present and msg is correct");
+        AssertJUnit.assertTrue("Notification not present for update or text is wrong", map.notificationText(DataItems.addInvoice).equals(DataItems.addNewInvoiceMsg));
+
+        System.out.println("Verify that data is saved correctly after edit");
+        AssertJUnit.assertTrue("Data saved for invoice name is not correct", map.invoiceNameOnTab.getText().equals(DataItems.invoiceDataForIndividual02[0].toUpperCase()));
+        AssertJUnit.assertTrue("Rest of the data that is saved for shipping address is not correct", map.invoiceDataOnTab.getText().equals(DataItems.invoiceDataForIndividual02[1]));
+    }
+
+
+    @Test
+            (groups = "Test")
+    public void ID_LE_01() throws Exception {
+        WebDriver driver = getDriver();
+
+        Carrefour_Base base = new Carrefour_Base(driver);
+        base.setUp("Invoice Data - Legal Entity 01 : Validation for empty fields", "ID_LE_01", DataItems.validUsername, DataItems.validPassword);
+
+        MyAccountObj map = new MyAccountObj(driver);
+        System.out.println("Going to invoice data tab");
+        map.goToInvoiceData();
+
+        System.out.println("Clearing all fields and saving");
+        map.newInvoiceDataButton.click();
+        map.inputLegalEntityDataForInvoices("", "", "", "", "");
+
+        System.out.println("Asserting mandatory fields alerts");
+        Wait.clickable(driver, map.warningInvoiceNameField);
+        AssertJUnit.assertTrue("Warning msg didn't show up or is incorrect for invoice name", map.warningInvoiceNameField.getText().equals(DataItems.blankFieldMsgForShipping));
+        AssertJUnit.assertTrue("Warning msg didn't show up or is incorrect for firm name", map.warningFirmName.getText().equals(DataItems.blankFieldMsgForShipping));
+        AssertJUnit.assertTrue("Warning msg didn't show up or is incorrect for fiscal code", map.warningFiscalCode.getText().equals(DataItems.blankFieldMsgForShipping));
+        AssertJUnit.assertTrue("Warning msg didn't show up or is incorrect for legal entity address", map.warningAddressLegalEntity.getText().equals(DataItems.blankFieldMsgForShipping));
+        AssertJUnit.assertTrue("Warning msg didn't show up or is incorrect for legal entity else field", map.warningLegalEntityElseField.getText().equals(DataItems.blankFieldMsgForShipping));
+    }
+
+    @Test
+            (groups = "Test")
+    public void ID_LE_02() throws Exception {
+        WebDriver driver = getDriver();
+
+        Carrefour_Base base = new Carrefour_Base(driver);
+        base.setUp("Invoice Data – Legal Entity 02 : Add new adress flow is working correct", "ID_LE_02", DataItems.validUsername, DataItems.validPassword);
+
+        MyAccountObj map = new MyAccountObj(driver);
+        System.out.println("Going to invoice data tab");
+        map.goToInvoiceData();
+
+        System.out.println("Creating Invoice for Individual");
+        map.newInvoiceDataButton.click();
+        map.inputLegalEntityDataForInvoices(DataItems.invoiceDataForLegalEntity01[0], DataItems.invoiceDataForLegalEntity01[1], DataItems.invoiceDataForLegalEntity01[2], DataItems.invoiceDataForLegalEntity01[3], DataItems.invoiceDataForLegalEntity01[4]);
+
+        System.out.println("Verify notification is present and msg is correct");
+        AssertJUnit.assertTrue("Notification not present for update or text is wrong", map.notificationText(DataItems.addInvoice).equals(DataItems.addNewInvoiceMsg));
+
+        System.out.println("Verify that data is saved correctly");
+        AssertJUnit.assertTrue("Data saved for address name is not correct", map.invoiceNameOnTab.getText().equals(DataItems.invoiceDataForLegalEntity01[0].toUpperCase()));
+        AssertJUnit.assertTrue("Rest of the data that is saved for shipping address is not correct", map.invoiceDataOnTab.getText().equals(DataItems.invoiceDataForLegalEntity01[3]));
+    }
+
+    @Test
+            (groups = "Test")
+    public void ID_LE_03() throws Exception {
+        WebDriver driver = getDriver();
+
+        Carrefour_Base base = new Carrefour_Base(driver);
+        base.setUp("Invoice Data – Individual 03 : Edit test", "ID_LE_03", DataItems.validUsername, DataItems.validPassword);
+
+        MyAccountObj map = new MyAccountObj(driver);
+        System.out.println("Going to invoice data tab");
+        map.goToInvoiceData();
+
+        System.out.println("Creating Invoice for Individual");
+        map.newInvoiceDataButton.click();
+        map.inputLegalEntityDataForInvoices(DataItems.invoiceDataForLegalEntity01[0], DataItems.invoiceDataForLegalEntity01[1], DataItems.invoiceDataForLegalEntity01[2], DataItems.invoiceDataForLegalEntity01[3], DataItems.invoiceDataForLegalEntity01[4]);
+        AssertJUnit.assertTrue("Notification not present for update or text is wrong", map.notificationText(DataItems.addInvoice).equals(DataItems.addNewInvoiceMsg));
+
+        System.out.println("Editing Invoice for Individual and adding new data");
+        map.editInvoiceDataButton.click();
+        map.inputLegalEntityDataForInvoices(DataItems.invoiceDataForLegalEntity02[0], DataItems.invoiceDataForLegalEntity02[1], DataItems.invoiceDataForLegalEntity02[2], DataItems.invoiceDataForLegalEntity02[3], DataItems.invoiceDataForLegalEntity02[4]);
+
+        System.out.println("Verify notification is present and msg is correct");
+        AssertJUnit.assertTrue("Notification not present for update or text is wrong", map.notificationText(DataItems.addInvoice).equals(DataItems.addNewInvoiceMsg));
+
+        System.out.println("Verify that data is saved correctly after edit");
+        AssertJUnit.assertTrue("Data saved for invoice name is not correct", map.invoiceNameOnTab.getText().equals(DataItems.invoiceDataForLegalEntity02[0].toUpperCase()));
+        AssertJUnit.assertTrue("Rest of the data that is saved for shipping address is not correct", map.invoiceDataOnTab.getText().equals(DataItems.invoiceDataForLegalEntity02[1]));
+    }
+
+    @Test
+            (groups = "Test")
+    public void ID_LE_04() throws Exception {
+        WebDriver driver = getDriver();
+
+        Carrefour_Base base = new Carrefour_Base(driver);
+        base.setUp("Invoice Data – Individual 03 : Delete test", "ID_LE_04", DataItems.validUsername, DataItems.validPassword);
+
+        MyAccountObj map = new MyAccountObj(driver);
+        System.out.println("Going to invoice data tab");
+        map.goToInvoiceData();
+
+        System.out.println("Creating Invoice for Individual");
+        map.newInvoiceDataButton.click();
+        map.inputLegalEntityDataForInvoices(DataItems.invoiceDataForLegalEntity01[0], DataItems.invoiceDataForLegalEntity01[1], DataItems.invoiceDataForLegalEntity01[2], DataItems.invoiceDataForLegalEntity01[3], DataItems.invoiceDataForLegalEntity01[4]);
+        AssertJUnit.assertTrue("Notification not present for update or text is wrong", map.notificationText(DataItems.addInvoice).equals(DataItems.addNewInvoiceMsg));
+
+        System.out.println("Deleting Invoice");
+        AssertJUnit.assertTrue("Notification not present for update or text is wrong", map.notificationText(DataItems.addInvoice).equals(DataItems.addNewInvoiceMsg));
 
     }
+
+
+
 
 
 

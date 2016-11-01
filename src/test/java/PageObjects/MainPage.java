@@ -48,13 +48,17 @@ public class MainPage {
     public WebElement notificationUserUpdate;
 
     @FindBy(css = "body > div.ui-notification.ng-scope.info")
-    public  WebElement notificationShippingAddNew;
+    public WebElement notificationShippingAddNew;
 
     @FindBy(css = "body > div.ui-notification.ng-scope.info.killed > div")
-    public  WebElement notificationShippingUpdate;
+    public WebElement notificationShippingUpdate;
 
     @FindBy(css = "body > div.ui-notification.ng-scope.info.killed")
-    public  WebElement notificationShippingDelete;
+    public WebElement notificationShippingDelete;
+
+    @FindBy(css = "body > div.ui-notification.ng-scope.info.killed > div")
+    public WebElement notificationInvoiceAddNew;
+
 
 
     public String notificationText(String typeOfNotif) {
@@ -93,6 +97,10 @@ public class MainPage {
             Wait.visible(driver, notificationShippingDelete);
             Wait.textPresent(driver, notificationShippingDelete, DataItems.deleteShippingAddressMsg);
             notificationText = notificationShippingDelete.getText();
+        } else if (typeOfNotif.equals(DataItems.addInvoice)) {
+            Wait.visible(driver, notificationInvoiceAddNew);
+            Wait.textPresent(driver, notificationInvoiceAddNew, DataItems.deleteInvoiceMsg);
+            notificationText = notificationInvoiceAddNew.getText();
         }
 
 

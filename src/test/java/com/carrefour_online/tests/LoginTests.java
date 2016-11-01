@@ -7,6 +7,8 @@ import org.openqa.selenium.WebDriver;
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
+import static AutomationFramework.Wait.visible;
+
 public class LoginTests extends DriverBase {
 
     @Test
@@ -75,10 +77,52 @@ public class LoginTests extends DriverBase {
         Carrefour_Base base = new Carrefour_Base(driver);
         base.setUp("Login Validation 03 : Verify that login is possible after password was changed", "L_V_03", DataItems.validUsername, DataItems.validPassword);
 
-        System.out.println("Going to dashboard and changing password");
+        System.out.println("Going to my profile and changing password");
+        MyAccountObj map = new MyAccountObj(driver);
+        map.goToMyProfile();
+        map.changePasswordForUser(DataItems.validPassword, DataItems.changedPassword);
+        map.logoutUser();
 
+        System.out.println("Login with new password");
+        base.setUp("", "", DataItems.validUsername, DataItems.changedPassword);
+        AssertJUnit.assertTrue("Login is not successful or notification is not proper", map.notificationText(DataItems.login).equals(DataItems.correctLoginMsg));
 
+        System.out.println("Going to my profile and changing password");
+        map.goToMyProfile();
+        map.changePasswordForUser(DataItems.changedPassword, DataItems.validPassword);
+        map.logoutUser();
 
-
+        System.out.println("Login with new password");
+        base.setUp("", "", DataItems.validUsername, DataItems.validPassword);
+        AssertJUnit.assertTrue("Login is not successful or notification is not proper", map.notificationText(DataItems.login).equals(DataItems.correctLoginMsg));
     }
+
+    @Test
+            (groups = "Test")
+    public void L_04() throws Exception {
+        WebDriver driver = getDriver();
+
+        Carrefour_Base base = new Carrefour_Base(driver);
+        base.setUp("Login Validation 04 : Verify that login is possible after email was changed", "L_V_04", DataItems.validUsername, DataItems.validPassword);
+
+        System.out.println("Going to my profile and changing email address");
+        MyAccountObj map = new MyAccountObj(driver);
+        map.goToMyProfile();
+        map.changeEmailAddress(DataItems.changedUsername);
+        map.logoutUser();
+
+        System.out.println("Login with new email address");
+        base.setUp("", "", DataItems.changedUsername, DataItems.validPassword);
+        AssertJUnit.assertTrue("Login is not successful or notification is not proper", map.notificationText(DataItems.login).equals(DataItems.correctLoginMsg));
+
+        System.out.println("Going to my profile and changing email address");
+        map.goToMyProfile();
+        map.changeEmailAddress(DataItems.validUsername);
+        map.logoutUser();
+
+        System.out.println("Login with new email address");
+        base.setUp("", "", DataItems.validUsername, DataItems.validPassword);
+        AssertJUnit.assertTrue("Login is not successful or notification is not proper", map.notificationText(DataItems.login).equals(DataItems.correctLoginMsg));
+    }
+
 }
