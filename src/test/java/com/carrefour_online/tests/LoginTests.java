@@ -66,4 +66,19 @@ public class LoginTest extends DriverBase {
         AssertJUnit.assertTrue("Label is not correct for login new account password field", map.getLabelNameFor(DataItems.newAccPassword[0]).equals(DataItems.newAccPassword[1]));
         AssertJUnit.assertTrue("Label is not correct for login new account confirm password field", map.getLabelNameFor(DataItems.newAccConfirmPassword[0]).equals(DataItems.newAccConfirmPassword[1]));
     }
+
+    @Test
+            (groups = "Test")
+    public void L_V_03() throws Exception {
+        WebDriver driver = getDriver();
+
+        Carrefour_Base base = new Carrefour_Base(driver);
+        base.setUp("Login Validation 03 : Verify that login is possible after password was changed", "L_V_03", DataItems.validUsername, DataItems.validPassword);
+
+        System.out.println("Going to dashboard and changing password");
+
+
+
+
+    }
 }
