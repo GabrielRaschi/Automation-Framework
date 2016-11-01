@@ -56,8 +56,13 @@ public class MainPage {
     @FindBy(css = "body > div.ui-notification.ng-scope.info.killed")
     public WebElement notificationShippingDelete;
 
-    @FindBy(css = "body > div.ui-notification.ng-scope.info.killed > div")
+    @FindBy(css = "body > div.ui-notification.ng-scope.info")
     public WebElement notificationInvoiceAddNew;
+
+    @FindBy(css = "body > div.ui-notification.ng-scope.info.killed > div")
+    public WebElement notificationInvoiceDelete;
+
+
 
 
 
@@ -99,10 +104,13 @@ public class MainPage {
             notificationText = notificationShippingDelete.getText();
         } else if (typeOfNotif.equals(DataItems.addInvoice)) {
             Wait.visible(driver, notificationInvoiceAddNew);
-            Wait.textPresent(driver, notificationInvoiceAddNew, DataItems.deleteInvoiceMsg);
+            Wait.textPresent(driver, notificationInvoiceAddNew, DataItems.addNewInvoiceMsg);
             notificationText = notificationInvoiceAddNew.getText();
+        }else if (typeOfNotif.equals(DataItems.deleteInvoice)) {
+            Wait.visible(driver, notificationInvoiceDelete);
+            Wait.textPresent(driver, notificationInvoiceDelete, DataItems.deleteInvoiceMsg);
+            notificationText = notificationInvoiceDelete.getText();
         }
-
 
         return notificationText;
     }

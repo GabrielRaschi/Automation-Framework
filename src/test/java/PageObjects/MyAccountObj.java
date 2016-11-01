@@ -309,7 +309,10 @@ public class MyAccountObj extends MainPage{
     public  WebElement invoiceDataOnTab;
 
     @FindBy(css = "#my-companies > ul > li:nth-child(1) > div > div.item.right > a.account-link.edit-button.ng-binding")
-    public  WebElement editInvoiceDataButton;
+    public WebElement editInvoiceDataButton;
+
+    @FindBy(css = "#my-companies > ul > li:nth-child(1) > div > div.item.right > a.account-link.delete.ng-binding")
+    public WebElement deleteInvoiceDataButton;
 
     // --- Invoice Data Form
 
@@ -476,7 +479,8 @@ public class MyAccountObj extends MainPage{
     }
 
     public void changeEmailAddress(String email){
-        CommonTask.setDropDownField(driver, emailAdressEditField, email);
+        editEmailAdressButton.click();
+        CommonTask.setInputField(driver, emailAdressEditField, email);
         saveProfileButton.click();
     }
 

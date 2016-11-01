@@ -19,7 +19,7 @@ public class DataItems {
     public static String deleteShippingAddressMsg = "adresa a fost stearsa";
     public static String addNewInvoiceMsg = "datele de facturare au fost salvate";
     public static String updateInvoiceMsg = "";
-    public static String deleteInvoiceMsg = "";
+    public static String deleteInvoiceMsg = "datele de facturare au fost sterse";
 
     // -------------- Type of notification
     public static String login = "Login";

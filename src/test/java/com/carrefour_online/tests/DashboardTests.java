@@ -328,7 +328,7 @@ public class DashboardTests extends DriverBase{
 
         System.out.println("Verify that data is saved correctly after edit");
         AssertJUnit.assertTrue("Data saved for invoice name is not correct", map.invoiceNameOnTab.getText().equals(DataItems.invoiceDataForLegalEntity02[0].toUpperCase()));
-        AssertJUnit.assertTrue("Rest of the data that is saved for shipping address is not correct", map.invoiceDataOnTab.getText().equals(DataItems.invoiceDataForLegalEntity02[1]));
+        AssertJUnit.assertTrue("Rest of the data that is saved for shipping address is not correct", map.invoiceDataOnTab.getText().equals(DataItems.invoiceDataForLegalEntity02[3]));
     }
 
     @Test
@@ -348,8 +348,9 @@ public class DashboardTests extends DriverBase{
         map.inputLegalEntityDataForInvoices(DataItems.invoiceDataForLegalEntity01[0], DataItems.invoiceDataForLegalEntity01[1], DataItems.invoiceDataForLegalEntity01[2], DataItems.invoiceDataForLegalEntity01[3], DataItems.invoiceDataForLegalEntity01[4]);
         AssertJUnit.assertTrue("Notification not present for update or text is wrong", map.notificationText(DataItems.addInvoice).equals(DataItems.addNewInvoiceMsg));
 
+        map.deleteInvoiceDataButton.click();
         System.out.println("Deleting Invoice");
-        AssertJUnit.assertTrue("Notification not present for update or text is wrong", map.notificationText(DataItems.addInvoice).equals(DataItems.addNewInvoiceMsg));
+        AssertJUnit.assertTrue("Notification not present for update or text is wrong", map.notificationText(DataItems.deleteInvoice).equals(DataItems.deleteInvoiceMsg));
 
     }
 

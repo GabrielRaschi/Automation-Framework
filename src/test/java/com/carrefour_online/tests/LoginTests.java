@@ -81,6 +81,7 @@ public class LoginTests extends DriverBase {
         MyAccountObj map = new MyAccountObj(driver);
         map.goToMyProfile();
         map.changePasswordForUser(DataItems.validPassword, DataItems.changedPassword);
+        AssertJUnit.assertTrue("Notification not present for update or text is wrong", map.notificationText(DataItems.updateProfile).equals(DataItems.userUpdateMsg));
         map.logoutUser();
 
         System.out.println("Login with new password");
@@ -90,6 +91,7 @@ public class LoginTests extends DriverBase {
         System.out.println("Going to my profile and changing password");
         map.goToMyProfile();
         map.changePasswordForUser(DataItems.changedPassword, DataItems.validPassword);
+        AssertJUnit.assertTrue("Notification not present for update or text is wrong", map.notificationText(DataItems.updateProfile).equals(DataItems.userUpdateMsg));
         map.logoutUser();
 
         System.out.println("Login with new password");
@@ -109,6 +111,7 @@ public class LoginTests extends DriverBase {
         MyAccountObj map = new MyAccountObj(driver);
         map.goToMyProfile();
         map.changeEmailAddress(DataItems.changedUsername);
+        AssertJUnit.assertTrue("Notification not present for update or text is wrong", map.notificationText(DataItems.updateProfile).equals(DataItems.userUpdateMsg));
         map.logoutUser();
 
         System.out.println("Login with new email address");
@@ -116,8 +119,10 @@ public class LoginTests extends DriverBase {
         AssertJUnit.assertTrue("Login is not successful or notification is not proper", map.notificationText(DataItems.login).equals(DataItems.correctLoginMsg));
 
         System.out.println("Going to my profile and changing email address");
+        map.myAccountLocator.click();
         map.goToMyProfile();
         map.changeEmailAddress(DataItems.validUsername);
+        AssertJUnit.assertTrue("Notification not present for update or text is wrong", map.notificationText(DataItems.updateProfile).equals(DataItems.userUpdateMsg));
         map.logoutUser();
 
         System.out.println("Login with new email address");
