@@ -1,23 +1,23 @@
 package com.carrefour_online.tests;
 
 import AutomationFramework.DataItems;
-import PageObjects.MyAccountPage;
+import PageObjects.MyAccountObj;
 import com.carrefour_online.DriverBase;
 import org.openqa.selenium.WebDriver;
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
-public class LoginTest extends DriverBase {
+public class LoginTests extends DriverBase {
 
     @Test
             (groups = "Test")
-    public void L_V_01() throws Exception {
+    public void L_01() throws Exception {
         WebDriver driver = getDriver();
 
         Carrefour_Base base = new Carrefour_Base(driver);
         base.setUp("Login Validation 01 : Login with: empty, wrong, correct combinations of password and username", "L_V_01");
 
-        MyAccountPage map = new MyAccountPage(driver);
+        MyAccountObj map = new MyAccountObj(driver);
 
         System.out.println("Login with empty username and pass and check notification");
         map.loginWithUsernameAndPassword("", "");
@@ -41,14 +41,14 @@ public class LoginTest extends DriverBase {
 
     @Test
             (groups = "Test")
-    public void L_V_02() throws Exception {
+    public void L_02() throws Exception {
         WebDriver driver = getDriver();
 
         Carrefour_Base base = new Carrefour_Base(driver);
         base.setUp("Login Validation 02 : Verify labels for login and new acc fields", "L_V_02");
 
         System.out.println("Verify labels for login form");
-        MyAccountPage map = new MyAccountPage(driver);
+        MyAccountObj map = new MyAccountObj(driver);
         map.myAccountLocator.click();
         AssertJUnit.assertTrue("Label is not correct for login form tab", map.getLabelNameFor(DataItems.loginFormTabAndTitle[0]).equals(DataItems.loginFormTabAndTitle[2]));
         AssertJUnit.assertTrue("Label is not correct for login form title", map.getLabelNameFor(DataItems.loginFormTabAndTitle[1]).equals(DataItems.loginFormTabAndTitle[2]));
@@ -69,7 +69,7 @@ public class LoginTest extends DriverBase {
 
     @Test
             (groups = "Test")
-    public void L_V_03() throws Exception {
+    public void L_03() throws Exception {
         WebDriver driver = getDriver();
 
         Carrefour_Base base = new Carrefour_Base(driver);

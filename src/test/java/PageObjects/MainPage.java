@@ -32,6 +32,9 @@ public class MainPage {
     @FindBy(css = "div > div > div > div.modal-header.ng-scope > button > span")
     public WebElement closeButton;
 
+
+    // --------- Notifications
+
     @FindBy(css = "body > div.ui-notification.ng-scope.warning > div")
     public WebElement notificationWarning;
 
@@ -41,35 +44,60 @@ public class MainPage {
     @FindBy(css = "body > div.ui-notification.ng-scope.info > div")
     public WebElement noticationLogout;
 
+    @FindBy(css = "body > div.ui-notification.ng-scope.success > div")
+    public WebElement notificationUserUpdate;
 
-    public String notificationText(String typeOfNotif){
-        MyAccountPage map = new MyAccountPage(driver);
+    @FindBy(css = "body > div.ui-notification.ng-scope.info")
+    public  WebElement notificationShippingAddNew;
+
+    @FindBy(css = "body > div.ui-notification.ng-scope.info.killed > div")
+    public  WebElement notificationShippingUpdate;
+
+    @FindBy(css = "body > div.ui-notification.ng-scope.info.killed")
+    public  WebElement notificationShippingDelete;
+
+
+    public String notificationText(String typeOfNotif) {
+        MyAccountObj map = new MyAccountObj(driver);
         String notificationText = "";
-        if (typeOfNotif.equals(DataItems.login)){
+        if (typeOfNotif.equals(DataItems.login)) {
             myAccountLocator.click();
             Wait.visible(driver, notificationLogin);
             Wait.textPresent(driver, notificationLogin, DataItems.correctLoginMsg);
             notificationText = notificationLogin.getText();
-        }
-        else if (typeOfNotif.equals(DataItems.logout)){
+        } else if (typeOfNotif.equals(DataItems.logout)) {
             myAccountLocator.click();
             map.logoutLocator.click();
             Wait.visible(driver, noticationLogout);
             Wait.textPresent(driver, noticationLogout, DataItems.correctLogoutMsg);
             notificationText = noticationLogout.getText();
-        }
-        else if (typeOfNotif.equals(DataItems.warning)){
+        } else if (typeOfNotif.equals(DataItems.warning)) {
             Wait.visible(driver, notificationWarning);
             Wait.textPresent(driver, notificationWarning, DataItems.wrongLoginMsg);
             notificationText = notificationWarning.getText();
             driver.navigate().refresh();
             Wait.visible(driver, myAccountLocator);
+        } else if (typeOfNotif.equals(DataItems.updateProfile)) {
+            Wait.visible(driver, notificationUserUpdate);
+            Wait.textPresent(driver, notificationUserUpdate, DataItems.userUpdateMsg);
+            notificationText = notificationUserUpdate.getText();
+        }else if (typeOfNotif.equals(DataItems.addShppingAddress)) {
+            Wait.visible(driver, notificationShippingAddNew);
+            Wait.textPresent(driver, notificationShippingAddNew, DataItems.addNewShippingAddressMsg);
+            notificationText = notificationShippingAddNew.getText();
+        } else if (typeOfNotif.equals(DataItems.updateShppingAddress)) {
+            Wait.visible(driver, notificationShippingUpdate);
+            Wait.textPresent(driver, notificationShippingUpdate, DataItems.shippingAddressUpdateMsg);
+            notificationText = notificationShippingUpdate.getText();
+        } else if (typeOfNotif.equals(DataItems.deleteShippingAddress)) {
+            Wait.visible(driver, notificationShippingDelete);
+            Wait.textPresent(driver, notificationShippingDelete, DataItems.deleteShippingAddressMsg);
+            notificationText = notificationShippingDelete.getText();
         }
-        return  notificationText;
+
+
+        return notificationText;
     }
-
-
-
 
 
 }

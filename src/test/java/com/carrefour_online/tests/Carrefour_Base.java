@@ -1,6 +1,6 @@
 package com.carrefour_online.tests;
 import AutomationFramework.DataItems;
-import PageObjects.MyAccountPage;
+import PageObjects.MyAccountObj;
 import org.openqa.selenium.WebDriver;
 
 public class Carrefour_Base {
@@ -23,7 +23,7 @@ public class Carrefour_Base {
         //Maximize browser window
         driver.manage().window().maximize();
 
-        MyAccountPage map = new MyAccountPage(driver);
+        MyAccountObj map = new MyAccountObj(driver);
         map.closeButton.click();
 
 
@@ -41,7 +41,7 @@ public class Carrefour_Base {
         //Maximize browser window
         driver.manage().window().maximize();
 
-        MyAccountPage map = new MyAccountPage(driver);
+        MyAccountObj map = new MyAccountObj(driver);
 
         //Login with valid credentials
         map.loginWithUsernameAndPassword(username, password);

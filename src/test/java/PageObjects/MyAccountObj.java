@@ -15,9 +15,9 @@ import static AutomationFramework.Wait.clickable;
 import static AutomationFramework.Wait.visible;
 
 
-public class MyAccountPage extends MainPage{
+public class MyAccountObj extends MainPage{
 
-    public MyAccountPage(WebDriver passedDriver) {
+    public MyAccountObj(WebDriver passedDriver) {
         super(passedDriver);
         PageFactory.initElements(passedDriver, this);
     }
@@ -102,6 +102,9 @@ public class MyAccountPage extends MainPage{
     @FindBy(css = "body > div.page-container.ng-scope > header > nav > div.navbar-menu.navbar-column > ul > li.dropdown.login-user.ng-scope.open > div.dropdown-menu.dropdown-account.ng-scope > ul > div > li:nth-child(3) > a")
     public WebElement shippingAdressMenuLocator;
 
+    @FindBy(css = "body > div.page-container.ng-scope > header > nav > div.navbar-menu.navbar-column > ul > li.dropdown.login-user.ng-scope.open > div.dropdown-menu.dropdown-account.ng-scope > ul > div > li:nth-child(4) > a")
+    public WebElement invoiceDataMenuLocator;
+
     @FindBy(css = "body > div > header > nav > div.navbar-menu.navbar-column > ul > li.dropdown.login-user.ng-scope.open > div.dropdown-menu.dropdown-account.ng-scope > ul > div > li.last.ng-scope > a > span")
     public WebElement logoutLocator;
 
@@ -113,6 +116,9 @@ public class MyAccountPage extends MainPage{
 
     @FindBy(css = "#my-addresses-tab-head")
     public WebElement shippingAdressTab;
+
+    @FindBy(css = "#my-companies-tab-head")
+    public  WebElement invoiceDataTab;
 
 
 
@@ -205,6 +211,9 @@ public class MyAccountPage extends MainPage{
     @FindBy(css = "#my-addresses > ul > li:nth-child(1) > div > div.item.right > a.account-link.edit-button.ng-binding")
     public WebElement editShippingAddressButton;
 
+    @FindBy(css = "#my-addresses > ul > li:nth-child(1) > div > div.item.right > a.account-link.delete.ng-binding")
+    public WebElement deleteShippingAddressButton;
+
     // --- Ship Address form
 
     @FindBy(id = "addressName")
@@ -284,6 +293,25 @@ public class MyAccountPage extends MainPage{
 
     @FindBy(css = "body > div:nth-child(1) > div > div > div.modal-footer.ng-scope > button.btn.btn-primary.ng-binding")
     public WebElement shSaveButton;
+
+
+    // ---------  Invoice Data Tab
+
+    // ---- Tab Locators
+
+    @FindBy(css = "#my-companies > div > a > span.text-button.ng-binding")
+    public  WebElement newInvoiceDataButton;
+
+    // --- Invoice Data Form
+
+    @FindBy(css = "body > div:nth-child(1) > div > div > div.modal-body.ng-scope > form > div:nth-child(1) > input")
+    public WebElement invoiceNameField;
+
+
+
+
+
+
 
 
 
@@ -385,6 +413,13 @@ public class MyAccountPage extends MainPage{
         shippingAdressTab.click();
     }
 
+    public void goToInvoiceData(){
+        clickable(driver, notificationLogin);
+        invoiceDataMenuLocator.click();
+        clickable(driver, invoiceDataTab);
+        invoiceDataTab.click();
+    }
+
 
 
     public void inputMyProfileData(String lastname, String firstname, String email, String phone){
@@ -425,7 +460,7 @@ public class MyAccountPage extends MainPage{
         else CommonTask.setDropDownField(driver, shCityField, city);
     }
 
-    public void inputUserDataForShippingAdress(String firstname, String lastname, String phone){
+    public void inputUserDataForShippingAddress(String firstname, String lastname, String phone){
         CommonTask.setInputField(driver, shFirstNameField, firstname);
         CommonTask.setInputField(driver, shLastNameField, lastname);
         CommonTask.setInputField(driver, shPhoneNumberField, phone);
