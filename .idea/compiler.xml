@@ -24,9 +24,17 @@
         <processorPath useClasspath="true" />
         <module name="CarrefourOnline" />
       </profile>
+      <profile default="false" name="Annotation profile for ProjectName" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="ProjectName" />
+      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="CarrefourOnline" target="1.7" />
+      <module name="ProjectName" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>
